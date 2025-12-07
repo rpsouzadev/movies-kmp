@@ -1,5 +1,14 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        file.inputStream().use { load(it) }
+    }
+}
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -47,10 +56,14 @@ kotlin {
             implementation(libs.kotlin.serialization.json)
             implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-            implementation(libs.ktor.client.darwin)
         }
     }
 }
@@ -59,7 +72,9 @@ buildkonfig {
     packageName = "com.rpsouza.movies"
 
     defaultConfigs {
-        val tmdbKey = project.findProperty("TMDB_API_KEY") as String? ?: ""
+        val tmdbKey = localProperties.getProperty("TMDB_API_KEY")
+            ?: error("TMDB_API_KEY não definido em local.properties")
+
         buildConfigField(STRING, "TMDB_API_KEY", tmdbKey)
     }
 }
