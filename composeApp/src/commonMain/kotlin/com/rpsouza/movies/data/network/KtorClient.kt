@@ -1,5 +1,6 @@
 package com.rpsouza.movies.data.network
 
+import com.rpsouza.movies.getAccessToken
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
@@ -29,7 +30,7 @@ object KtorClient {
             bearer {
                 loadTokens {
                     BearerTokens(
-                        accessToken = "",
+                        accessToken = getAccessToken().token,
                         refreshToken = null
                     )
                 }

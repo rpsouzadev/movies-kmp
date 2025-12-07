@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -6,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -50,6 +52,15 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(libs.ktor.client.darwin)
         }
+    }
+}
+
+buildkonfig {
+    packageName = "com.rpsouza.movies"
+
+    defaultConfigs {
+        val tmdbKey = project.findProperty("TMDB_API_KEY") as String? ?: ""
+        buildConfigField(STRING, "TMDB_API_KEY", tmdbKey)
     }
 }
 
