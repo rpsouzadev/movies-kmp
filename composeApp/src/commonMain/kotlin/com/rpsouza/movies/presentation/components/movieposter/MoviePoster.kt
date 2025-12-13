@@ -57,6 +57,11 @@ fun MoviePoster(
 @Composable
 private fun MoviePosterPreview() {
     MoviePoster(
-        movie = Movie.getFakeMovies().first()
+        movie = Movie(
+            id = 1,
+            title = "Movie Title",
+            overview = "Movie Overview",
+            posterUrl = "https://image"
+        )
     )
 }

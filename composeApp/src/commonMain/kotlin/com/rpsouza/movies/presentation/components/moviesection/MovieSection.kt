@@ -47,6 +47,6 @@ fun MovieSection(
 private fun MovieSectionPreview() {
     MovieSection(
         title = "Movies",
-        movies = Movie.getFakeMovies()
+        movies = emptyList()
     )
 }

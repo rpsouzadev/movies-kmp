@@ -13,6 +13,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -20,11 +21,13 @@ import com.rpsouza.movies.domain.model.MovieSection
 import com.rpsouza.movies.presentation.components.moviesection.MovieSection
 import com.rpsouza.movies.presentation.res.Dimens
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.koinInject
 
 @Composable
-fun MoviesListScreen() {
-    val viewModel = koinViewModel<MoviesListViewModel>()
-    val state = viewModel.state.collectAsState().value
+fun MoviesListScreen(
+    viewModel: MoviesListViewModel = koinInject()
+) {
+    val state = viewModel.moviesListState.collectAsState().value
     MoviesListContentScreen(moviesListState = state)
 }
 
@@ -53,8 +56,7 @@ private fun MoviesListSuccessContent(
 ) {
     LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(Dimens.Dp16)
     ) {
         items(movieSections) {movieSection ->
