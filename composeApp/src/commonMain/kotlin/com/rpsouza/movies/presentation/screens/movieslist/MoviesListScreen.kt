@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -19,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.rpsouza.movies.domain.model.MovieSection
 import com.rpsouza.movies.presentation.components.moviesection.MovieSection
-import com.rpsouza.movies.presentation.res.Dimens
+import com.rpsouza.movies.presentation.theme.Dimens
 import movies.composeapp.generated.resources.Res
 import movies.composeapp.generated.resources.movies_list_now_playing_movies
 import movies.composeapp.generated.resources.movies_list_popular_movies

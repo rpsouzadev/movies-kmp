@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.rpsouza.movies.domain.model.Movie
 import com.rpsouza.movies.presentation.components.movieposter.MoviePoster
-import com.rpsouza.movies.presentation.res.Dimens
+import com.rpsouza.movies.presentation.theme.Dimens
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

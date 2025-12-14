@@ -1,4 +1,4 @@
-package com.rpsouza.movies.presentation.res
+package com.rpsouza.movies.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

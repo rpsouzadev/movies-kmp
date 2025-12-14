@@ -1,6 +1,5 @@
 package com.rpsouza.movies.presentation.components.movieposter
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -14,11 +13,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import coil3.compose.AsyncImage
 import com.rpsouza.movies.domain.model.Movie
-import com.rpsouza.movies.presentation.res.AppShapes
-import com.rpsouza.movies.presentation.res.Dimens
-import movies.composeapp.generated.resources.Res
-import movies.composeapp.generated.resources.minecraft
-import org.jetbrains.compose.resources.painterResource
+import com.rpsouza.movies.presentation.theme.AppShapes
+import com.rpsouza.movies.presentation.theme.Dimens
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
