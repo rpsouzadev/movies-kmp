@@ -7,6 +7,7 @@ import com.rpsouza.movies.di.dataModule
 import com.rpsouza.movies.di.networkModule
 import com.rpsouza.movies.di.viewModelModule
 import com.rpsouza.movies.navigation.AppHost
+import com.rpsouza.movies.presentation.theme.MoviesAppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 
@@ -16,7 +17,7 @@ fun App() {
     KoinApplication(
         application = { modules(networkModule, dataModule, viewModelModule) }
     ) {
-        MaterialTheme {
+        MoviesAppTheme {
             val navController = rememberNavController()
             AppHost(navController = navController)
         }
