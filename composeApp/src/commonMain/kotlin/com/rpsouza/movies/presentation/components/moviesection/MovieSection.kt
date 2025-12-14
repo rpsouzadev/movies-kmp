@@ -20,6 +20,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MovieSection(
     title: String,
     movies: List<Movie>,
+    onMovieClick: (Int) -> Unit
 ) {
     Column {
         Text(
@@ -36,7 +37,7 @@ fun MovieSection(
             horizontalArrangement = Arrangement.spacedBy(Dimens.Dp16)
         ) {
             items(movies) { movie ->
-                MoviePoster(movie = movie)
+                MoviePoster(movie = movie, onMovieClick = { onMovieClick(movie.id) })
             }
         }
     }
@@ -47,6 +48,7 @@ fun MovieSection(
 private fun MovieSectionPreview() {
     MovieSection(
         title = "Movies",
-        movies = emptyList()
+        movies = emptyList(),
+        onMovieClick = {}
     )
 }

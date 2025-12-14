@@ -1,5 +1,6 @@
 package com.rpsouza.movies.presentation.components.movieposter
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -13,24 +14,25 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import coil3.compose.AsyncImage
 import com.rpsouza.movies.domain.model.Movie
-import com.rpsouza.movies.presentation.theme.AppShapes
 import com.rpsouza.movies.presentation.theme.Dimens
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoviePoster(
     modifier: Modifier = Modifier,
-    movie: Movie
+    movie: Movie,
+    onMovieClick: () -> Unit
 ) {
     Column(
         modifier = modifier
             .width(Dimens.Dp140)
+            .clickable(onClick = onMovieClick)
     ) {
         Card(
             modifier = Modifier
                 .width(Dimens.Dp140)
                 .height(Dimens.Dp210),
-            shape = AppShapes.medium
+            shape = MaterialTheme.shapes.small
         ) {
             AsyncImage(
                 model = movie.posterUrl,
@@ -58,6 +60,7 @@ private fun MoviePosterPreview() {
             title = "Movie Title",
             overview = "Movie Overview",
             posterUrl = "https://image"
-        )
+        ),
+        onMovieClick = {}
     )
 }

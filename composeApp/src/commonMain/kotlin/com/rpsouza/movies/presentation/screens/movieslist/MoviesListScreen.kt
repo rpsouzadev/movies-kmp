@@ -29,15 +29,17 @@ import org.koin.compose.koinInject
 
 @Composable
 fun MoviesListScreen(
-    viewModel: MoviesListViewModel = koinInject()
+    viewModel: MoviesListViewModel = koinInject(),
+    navigateToMovieDetails: (Int) -> Unit
 ) {
     val state = viewModel.moviesListState.collectAsState().value
-    MoviesListContentScreen(moviesListState = state)
+    MoviesListContentScreen(moviesListState = state, navigateToMovieDetails = navigateToMovieDetails)
 }
 
 @Composable
 private fun MoviesListContentScreen(
-    moviesListState: MoviesListState
+    moviesListState: MoviesListState,
+    navigateToMovieDetails: (Int) -> Unit
 ) {
     Scaffold() { paddingValues ->
         Box(
@@ -47,7 +49,7 @@ private fun MoviesListContentScreen(
         ) {
             when (moviesListState) {
                 is MoviesListState.Loading -> MoviesListLoadingContent()
-                is MoviesListState.Success -> MoviesListSuccessContent(moviesListState.movieSections)
+                is MoviesListState.Success -> MoviesListSuccessContent(moviesListState.movieSections, navigateToMovieDetails)
                 is MoviesListState.Error -> MoviesListErrorContent(moviesListState.message)
             }
         }
@@ -56,7 +58,8 @@ private fun MoviesListContentScreen(
 
 @Composable
 private fun MoviesListSuccessContent(
-    movieSections: List<MovieSection>
+    movieSections: List<MovieSection>,
+    navigateToMovieDetails: (Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -68,25 +71,29 @@ private fun MoviesListSuccessContent(
                 MovieSection.SectionType.NOW_PLAYING -> {
                     MovieSection(
                         title = stringResource(Res.string.movies_list_now_playing_movies),
-                        movies = movieSection.movies
+                        movies = movieSection.movies,
+                        onMovieClick = navigateToMovieDetails
                     )
                 }
                 MovieSection.SectionType.UPCOMING -> {
                     MovieSection(
                         title = stringResource(Res.string.movies_list_upcoming_movies),
-                        movies = movieSection.movies
+                        movies = movieSection.movies,
+                        onMovieClick = navigateToMovieDetails
                     )
                 }
                 MovieSection.SectionType.POPULAR -> {
                     MovieSection(
                         title = stringResource(Res.string.movies_list_popular_movies),
-                        movies = movieSection.movies
+                        movies = movieSection.movies,
+                        onMovieClick = navigateToMovieDetails
                     )
                 }
                 MovieSection.SectionType.TOP_RATED -> {
                     MovieSection(
                         title = stringResource(Res.string.movies_list_top_rated_movies),
-                        movies = movieSection.movies
+                        movies = movieSection.movies,
+                        onMovieClick = navigateToMovieDetails
                     )
                 }
             }
@@ -127,6 +134,7 @@ private fun MoviesListLoadingContent() {
 @Composable
 private fun MoviesListPreview() {
     MoviesListContentScreen(
-        moviesListState = MoviesListState.Success(movieSections = emptyList())
+        moviesListState = MoviesListState.Success(movieSections = emptyList()),
+        navigateToMovieDetails = {}
     )
 }

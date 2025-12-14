@@ -52,13 +52,23 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MovieDetailsScreen() {
-    MovieDetailsContent()
+fun MovieDetailsScreen(
+    popBackStack: () -> Unit
+) {
+    MovieDetailsContent(
+        movie = Movie(
+        id = 1,
+        title = "The Shawshank Redemption",
+        overview = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+        posterUrl = ""
+    ),
+        popBackStack = popBackStack
+        )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MovieDetailsContent(movie: Movie) {
+private fun MovieDetailsContent(movie: Movie, popBackStack: () -> Unit) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -72,9 +82,7 @@ private fun MovieDetailsContent(movie: Movie) {
                         shape = MaterialTheme.shapes.small,
                     ) {
                         IconButton(
-                            onClick = {
-
-                            },
+                            onClick = popBackStack,
                             modifier = Modifier
                                 .size(Dimens.Dp32)
                         ) {
@@ -243,7 +251,8 @@ private fun MovieDetailsPreview() {
                 title = "The Shawshank Redemption",
                 overview = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
                 posterUrl = ""
-            )
+            ),
+            popBackStack = {}
         )
     }
 }
