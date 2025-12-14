@@ -20,6 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import com.rpsouza.movies.domain.model.MovieSection
 import com.rpsouza.movies.presentation.components.moviesection.MovieSection
 import com.rpsouza.movies.presentation.res.Dimens
+import movies.composeapp.generated.resources.Res
+import movies.composeapp.generated.resources.movies_list_now_playing_movies
+import movies.composeapp.generated.resources.movies_list_popular_movies
+import movies.composeapp.generated.resources.movies_list_top_rated_movies
+import movies.composeapp.generated.resources.movies_list_upcoming_movies
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 
@@ -63,25 +69,25 @@ private fun MoviesListSuccessContent(
             when(movieSection.sectionType) {
                 MovieSection.SectionType.NOW_PLAYING -> {
                     MovieSection(
-                        title = "Now Playing",
+                        title = stringResource(Res.string.movies_list_now_playing_movies),
                         movies = movieSection.movies
                     )
                 }
                 MovieSection.SectionType.UPCOMING -> {
                     MovieSection(
-                        title = "Upcoming",
+                        title = stringResource(Res.string.movies_list_upcoming_movies),
                         movies = movieSection.movies
                     )
                 }
                 MovieSection.SectionType.POPULAR -> {
                     MovieSection(
-                        title = "Popular",
+                        title = stringResource(Res.string.movies_list_popular_movies),
                         movies = movieSection.movies
                     )
                 }
                 MovieSection.SectionType.TOP_RATED -> {
                     MovieSection(
-                        title = "Top Rated",
+                        title = stringResource(Res.string.movies_list_top_rated_movies),
                         movies = movieSection.movies
                     )
                 }
