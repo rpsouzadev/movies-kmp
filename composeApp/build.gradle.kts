@@ -58,6 +58,7 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
             implementation(libs.bundles.koin)
+            implementation(libs.composeIcons.fontAwesome)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

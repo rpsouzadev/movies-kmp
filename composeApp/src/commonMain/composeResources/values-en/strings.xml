@@ -3,4 +3,7 @@
     <string name="movies_list_popular_movies">Popular</string>
     <string name="movies_list_top_rated_movies">Top Rated</string>
     <string name="movies_list_upcoming_movies">Upcoming</string>
+
+    <!--    Movie Details-->
+    <string name="movie_details_title">Movie Details</string>
 </resources>
