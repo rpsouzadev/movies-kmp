@@ -2,6 +2,7 @@ package com.rpsouza.movies.data.repository
 
 import com.rpsouza.movies.data.network.KtorClient
 import com.rpsouza.movies.data.network.mapper.toDomain
+import com.rpsouza.movies.domain.model.MovieDetails
 import com.rpsouza.movies.domain.model.MovieSection
 import com.rpsouza.movies.domain.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -44,5 +45,19 @@ class MoviesRepositoryImpl(
             )
         }
 
+    }
+
+    override suspend fun getMovieDetails(movieId: Int): Result<MovieDetails> {
+        return withContext(ioDispatcher) {
+            runCatching {
+                val movieDetailDeferred = async { ktorClient.getMovieDetail(movieId) }
+                val creditsDeferred = async { ktorClient.getCredits(movieId) }
+
+                val movieDetailResponse = movieDetailDeferred.await()
+                val creditsResponse = creditsDeferred.await()
+
+                movieDetailResponse.toDomain(castMembersResponse = creditsResponse.cast)
+            }
+        }
     }
 }

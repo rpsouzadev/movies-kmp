@@ -20,6 +20,7 @@ buildkonfig = "0.17.1"
 coil = "3.3.0"
 koin = "4.1.1"
 composeIcons = "1.1.1"
+kotlinxDatetime = "0.6.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -64,6 +65,9 @@ koin-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation",
 
 # Icons
 composeIcons-fontAwesome = { module = "br.com.devsrsouza.compose.icons:font-awesome", version.ref = "composeIcons" }
+
+# Datetime
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
 [bundles]
 ktor-common = [

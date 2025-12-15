@@ -59,6 +59,7 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.bundles.koin)
             implementation(libs.composeIcons.fontAwesome)
+            implementation(libs.kotlinx.datetime)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
