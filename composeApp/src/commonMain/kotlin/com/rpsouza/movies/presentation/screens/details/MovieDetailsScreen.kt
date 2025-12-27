@@ -1,6 +1,5 @@
 package com.rpsouza.movies.presentation.screens.details
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -14,6 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
@@ -36,7 +37,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import com.rpsouza.movies.domain.model.Movie
 import com.rpsouza.movies.domain.model.MovieDetails
 import com.rpsouza.movies.domain.model.movieDetails1
 import com.rpsouza.movies.presentation.components.castmemberitem.CastMemberItem
@@ -52,9 +52,8 @@ import compose.icons.fontawesomeicons.solid.Clock
 import compose.icons.fontawesomeicons.solid.Play
 import compose.icons.fontawesomeicons.solid.Star
 import movies.composeapp.generated.resources.Res
-import movies.composeapp.generated.resources.minecraft
 import movies.composeapp.generated.resources.movie_details_title
-import org.jetbrains.compose.resources.painterResource
+import movies.composeapp.generated.resources.movie_details_watch_trailer
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -142,14 +141,17 @@ private fun MovieDetailsContent(
 private fun MoviesDetailsSuccess(
     movie: MovieDetails,
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(scrollState),
         verticalArrangement = Arrangement.spacedBy(Dimens.Dp16)
     ) {
         Card(
             modifier = Modifier
-                .padding(Dimens.Dp16)
+                .padding(vertical = Dimens.Dp4)
                 .weight(1f),
             shape = MaterialTheme.shapes.large,
         ) {
@@ -157,6 +159,7 @@ private fun MoviesDetailsSuccess(
                 model = movie.posterUrl,
                 contentDescription = null,
                 modifier = Modifier
+                    .fillMaxSize()
                     .clip(MaterialTheme.shapes.medium),
                 contentScale = ContentScale.Crop,
             )
@@ -203,6 +206,7 @@ private fun MoviesDetailsSuccess(
             LazyRow(
                 modifier = Modifier,
                 verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(Dimens.Dp8),
             ) {
                 items(movie.genres) { genre ->
                     MovieGenreChip(
@@ -234,7 +238,7 @@ private fun MoviesDetailsSuccess(
                     )
 
                     Text(
-                        text = "Watch trailer",
+                        text = stringResource(Res.string.movie_details_watch_trailer),
                         modifier = Modifier
                             .padding(start = Dimens.Dp16),
                         fontWeight = FontWeight.Medium,
@@ -255,11 +259,11 @@ private fun MoviesDetailsSuccess(
                             contentPadding = PaddingValues(horizontal = Dimens.Dp16),
                             horizontalArrangement = Arrangement.spacedBy(Dimens.Dp16),
                         ) {
-                            items(10) {
+                            items(movie.castMembers) { cast ->
                                 CastMemberItem(
-                                    profilePictureUrl = "",
-                                    name = "Will Smith",
-                                    character = "Christopher Gardner",
+                                    profilePictureUrl = cast.profilePath,
+                                    name = cast.name,
+                                    character = cast.character,
                                     modifier = Modifier
                                         .width(itemWidth)
                                 )

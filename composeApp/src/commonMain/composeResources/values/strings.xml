@@ -6,4 +6,5 @@
 
     <!--    Movie Details-->
     <string name="movie_details_title">Detalhes do filme</string>
+    <string name="movie_details_watch_trailer">Assistir trailer</string>
 </resources>

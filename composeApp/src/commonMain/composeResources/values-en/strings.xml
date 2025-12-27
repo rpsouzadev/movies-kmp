@@ -6,4 +6,5 @@
 
     <!--    Movie Details-->
     <string name="movie_details_title">Movie Details</string>
+    <string name="movie_details_watch_trailer">Watch trailer</string>
 </resources>

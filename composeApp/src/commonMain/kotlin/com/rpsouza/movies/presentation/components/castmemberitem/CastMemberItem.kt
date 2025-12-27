@@ -1,6 +1,5 @@
 package com.rpsouza.movies.presentation.components.castmemberitem
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -16,18 +15,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import coil3.size.Dimension
+import coil3.compose.AsyncImage
 import com.rpsouza.movies.presentation.theme.Dimens
 import com.rpsouza.movies.presentation.theme.MoviesAppTheme
-import movies.composeapp.generated.resources.Res
-import movies.composeapp.generated.resources.minecraft
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CastMemberItem(
     modifier: Modifier = Modifier,
-    profilePictureUrl: String,
+    profilePictureUrl: String?,
     name: String,
     character: String,
 ) {
@@ -39,9 +35,8 @@ fun CastMemberItem(
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            // Usar Image e depois vamos mudar para AsyncImage
-            Image(
-                painter = painterResource(Res.drawable.minecraft),
+            AsyncImage(
+                model = profilePictureUrl,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxHeight()
