@@ -9,6 +9,7 @@ import com.rpsouza.movies.domain.model.CastMember
 import com.rpsouza.movies.domain.model.Genre
 import com.rpsouza.movies.domain.model.Movie
 import com.rpsouza.movies.domain.model.MovieDetails
+import com.rpsouza.movies.utils.formatRating
 import kotlin.math.roundToInt
 
 fun MovieResponse.toDomain() = Movie(
@@ -39,7 +40,7 @@ fun MovieDetailsResponse.toDomain(castMembersResponse: List<CastMemberResponse>)
     genres = this.genres.map { it.toDomain() },
     year = this.getYearFromReleaseDate(),
     duration = this.getDurationInHoursAndMinutes(),
-    rating = "${this.voteAverage.roundToInt()}",
+    rating = this.voteAverage.formatRating(),
     castMembers = castMembersResponse
         .filter { it.knownForDepartment == "Acting" }
         .take(20)
